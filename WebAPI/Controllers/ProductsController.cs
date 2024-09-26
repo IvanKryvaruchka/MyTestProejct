@@ -7,6 +7,8 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class ProductsController : Controller
     {
         private readonly NorthwindContext _context;
