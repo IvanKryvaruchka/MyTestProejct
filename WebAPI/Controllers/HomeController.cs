@@ -8,8 +8,8 @@ namespace WebAPI.Controllers
     {
         public IActionResult Index()
         {
-            ViewData["Message"] = "Welcome to the Northwind Database Web Application!";
-            return View();
+            var message = new { Message = "Welcome to the Northwind Database Web Application!" };
+            return Json(message);
         }
     }
 }

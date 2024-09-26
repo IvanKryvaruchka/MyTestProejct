@@ -21,7 +21,7 @@ namespace WebAPI
         {
             services.AddControllers();
             services.AddDbContext<NorthwindContext>(options =>
-                options.UseSqlServer("your_connection_string"));
+                options.UseSqlServer(Configuration.GetConnectionString("NorthwindDatabase")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
