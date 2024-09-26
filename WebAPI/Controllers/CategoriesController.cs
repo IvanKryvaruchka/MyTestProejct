@@ -4,8 +4,6 @@ using WebAPI.Data;
 
 namespace WebAPI.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
     public class CategoriesController : Controller
     {
         private readonly NorthwindContext _context;

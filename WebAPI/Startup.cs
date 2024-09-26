@@ -19,7 +19,7 @@ namespace WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllersWithViews();
             services.AddDbContext<NorthwindContext>(options =>
                 options.UseSqlServer("your_connection_string"));
         }
