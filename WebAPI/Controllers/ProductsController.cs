@@ -38,7 +38,7 @@ namespace WebAPI.Controllers
                 })
                 .ToListAsync();
 
-            return View(products);
+            return Json(products);
         }
     }
 }

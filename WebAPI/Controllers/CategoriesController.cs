@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
         public IActionResult Index()
         {
             var categories = _context.Categories.ToList();
-            return View(categories);
+            return Json(categories);
         }
     }
 }
