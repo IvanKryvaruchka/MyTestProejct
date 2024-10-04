@@ -11,6 +11,10 @@
     <p>Showing a maximum of @ViewBag.MaxProductsToShow products.</p>
 }
 
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Product</a>
+</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -24,6 +28,7 @@
             <th>Units On Order</th>
             <th>Reorder Level</th>
             <th>Discontinued</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -40,6 +45,10 @@
                 <td>@item.UnitsOnOrder</td>
                 <td>@item.ReorderLevel</td>
                 <td>@item.Discontinued</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-danger">Delete</a>
+                </td>
             </tr>
         }
     </tbody>
