@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.Data;
@@ -10,14 +11,18 @@ namespace WebAPI.Controllers
     public class ProductsController : Controller
     {
         private readonly NorthwindContext _context;
+        private readonly IConfiguration _configuration;
 
-        public ProductsController(NorthwindContext context)
+        public ProductsController(NorthwindContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public async Task<IActionResult> Index()
         {
+            var maxProductsToShow = _configuration.GetValue<int>("MaxProductsToShow");
+
             var products = await _context.Products
                 .Select(p => new Product
                 {
@@ -35,6 +40,11 @@ namespace WebAPI.Controllers
                     Discontinued = p.Discontinued
                 })
                 .ToListAsync();
+
+            if (maxProductsToShow > 0)
+            {
+                products = products.Take(maxProductsToShow).ToList();
+            }
 
             return View(products);
         }
