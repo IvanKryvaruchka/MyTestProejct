@@ -78,11 +78,16 @@ namespace WebAPI.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Supplier)
+                .FirstOrDefaultAsync(p => p.ProductId == id);
+
             if (product == null)
             {
                 return NotFound();
             }
+
             ViewBag.Categories = _context.Categories.ToList();
             ViewBag.Suppliers = _context.Suppliers.ToList();
             return View(product);
