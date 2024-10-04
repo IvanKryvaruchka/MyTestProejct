@@ -6,6 +6,11 @@
 
 <h2>Products</h2>
 
+@if (ViewBag.MaxProductsToShow > 0)
+{
+    <p>Showing a maximum of @ViewBag.MaxProductsToShow products.</p>
+}
+
 <table class="table">
     <thead>
         <tr>
