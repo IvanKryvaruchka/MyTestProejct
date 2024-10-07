@@ -29,9 +29,9 @@ namespace WebAPI.Controllers
                     ProductId = p.ProductId,
                     ProductName = p.ProductName,
                     CategoryId = p.CategoryId,
-                    CategoryName = _context.Categories.FirstOrDefault(c => c.CategoryId == p.CategoryId).CategoryName,
+                    Category = _context.Categories.FirstOrDefault(c => c.CategoryId == p.CategoryId),
                     SupplierId = p.SupplierId,
-                    SupplierName = _context.Suppliers.FirstOrDefault(s => s.SupplierId == p.SupplierId).CompanyName,
+                    Supplier = _context.Suppliers.FirstOrDefault(s => s.SupplierId == p.SupplierId),
                     QuantityPerUnit = p.QuantityPerUnit,
                     UnitPrice = p.UnitPrice,
                     UnitsInStock = p.UnitsInStock,
@@ -78,16 +78,11 @@ namespace WebAPI.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .Include(p => p.Category)
-                .Include(p => p.Supplier)
-                .FirstOrDefaultAsync(p => p.ProductId == id);
-
+            var product = await _context.Products.FindAsync(id);
             if (product == null)
             {
                 return NotFound();
             }
-
             ViewBag.Categories = _context.Categories.ToList();
             ViewBag.Suppliers = _context.Suppliers.ToList();
             return View(product);
